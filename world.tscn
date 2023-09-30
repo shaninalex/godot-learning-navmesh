@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://57o7akbdanwm"]
+
+[ext_resource type="Script" path="res://CharacterBody2D.gd" id="1_uj4ra"]
+[ext_resource type="Texture2D" uid="uid://l5rq3g3qmpf6" path="res://rc_car.png" id="1_wdno4"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_db8hc"]
+vertices = PackedVector2Array(509, -79, 688, 88, 585, 43, 242, 216, 256, 190, 241, 316, 229, 281, 102, 119, 92, 49, 308, -29, 412, 146, 128, 220, -61, -57, 40, 32, 55, 201, 84, 433, -129, 338, -1, 101, 468, 52, 402, -27, 403, 74, 518, 119, 573, 96, 664, 188, 486, 308, 498, 182, 361, 345, 413, 243, 425, 434, 140, 370, 133, 291, 109, 218, 81, 120)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 4, 5, 6), PackedInt32Array(7, 8, 9, 10, 4, 11), PackedInt32Array(12, 9, 8, 13), PackedInt32Array(14, 15, 16, 17), PackedInt32Array(0, 2, 18, 19), PackedInt32Array(20, 19, 18, 21), PackedInt32Array(21, 18, 22), PackedInt32Array(22, 2, 1, 23), PackedInt32Array(21, 22, 23, 24, 25), PackedInt32Array(26, 27, 25, 24, 28), PackedInt32Array(26, 28, 29, 5), PackedInt32Array(6, 5, 29, 30), PackedInt32Array(30, 29, 31), PackedInt32Array(11, 30, 31, 7), PackedInt32Array(12, 13, 17), PackedInt32Array(16, 12, 17), PackedInt32Array(14, 17, 32), PackedInt32Array(7, 14, 32), PackedInt32Array(7, 32, 8), PackedInt32Array(11, 4, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(102, 119, 109, 218, 140, 370, 425, 434, 486, 308, 664, 188, 688, 88, 509, -79, 402, -27, 403, 74, 518, 119, 498, 182, 413, 243, 361, 345, 241, 316, 256, 190, 412, 146, 308, -29, -61, -57, -129, 338, 84, 433, 55, 201), PackedVector2Array(40, 32, -1, 101, 81, 120, 92, 49), PackedVector2Array(128, 220, 242, 216, 229, 281, 133, 291), PackedVector2Array(468, 52, 573, 96, 585, 43)])
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8601g"]
+size = Vector2(31, 37)
+
+[node name="Node2D" type="Node2D"]
+metadata/_edit_horizontal_guides_ = []
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.0627451, 0.239216, 0, 1)
+polygon = PackedVector2Array(188, 495, 407, 585, 377, 354, 419, 268, 426, 354, 458, 513, 740, 581, 801, 452, 983, 339, 1012, 232, 830, 76, 720, 129, 721, 222, 832, 268, 805, 332, 725, 387, 681, 494, 559, 460, 574, 336, 732, 286, 626, 121, 258, 88)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+show_behind_parent = true
+top_level = true
+position = Vector2(318, 148)
+navigation_polygon = SubResource("NavigationPolygon_db8hc")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="NavigationRegion2D"]
+position = Vector2(-44, 263)
+script = ExtResource("1_uj4ra")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/CharacterBody2D"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_8601g")
+one_way_collision = true
+
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/CharacterBody2D"]
+rotation = 1.5708
+scale = Vector2(0.0506945, 0.0506945)
+texture = ExtResource("1_wdno4")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="NavigationRegion2D/CharacterBody2D"]
+target_desired_distance = 10.6
+avoidance_enabled = true
+radius = 133.79
+debug_enabled = true
+debug_path_custom_color = Color(1, 0.886275, 0, 1)
